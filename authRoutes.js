@@ -15,7 +15,7 @@ router.get(
   "/auth/google/callback",
   passport.authenticate("google", { failureRedirect: "/login", session: true }),
   async (req, res) => {
-    console.log("checking",console.log(req))
+    console.log("checking", console.log(req))
     const { displayName, emails } = req.user;
     const email = emails[0].value;
 
@@ -29,11 +29,11 @@ router.get(
           googleId: id,
           isGoogleAuth: true, // Explicitly set isGoogleAuth
         });
-        console.log("created user",user)
+        console.log("created user", user)
         await user.save();
       }
       // Redirect to the frontend after successful login
-      res.redirect("http://localhost:3000/");
+      res.redirect("https://dobla.netlify.app/");
     } catch (err) {
       console.error("Error during Google OAuth callback:", err);
       res.redirect("/login"); // Redirect back to login on error
@@ -48,7 +48,7 @@ router.get(
 router.get("/logout", (req, res) => {
   req.logout((err) => {
     if (err) return res.status(500).send("Error logging out");
-    res.redirect("http://localhost:3000");
+    res.redirect("https://dobla.netlify.app");
   });
 });
 
