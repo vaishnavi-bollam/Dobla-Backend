@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 
 const Product = require("../models/productsSchema")
 
-const {sortingConsts,order} = require("../constants/common.constants")
+const { sortingConsts, order } = require("../constants/common.constants")
 
 /**
  * getProducts
@@ -19,8 +19,8 @@ const getProducts = async (req, res) => {
         // console.log("Body", req.body);
         // console.log("Params", req.params);
 
-        const { sort_by, rating, title_search,category} = req.query;
-        
+        const { sort_by, rating, title_search, category } = req.query;
+
         console.log("sortby", sort_by);
         console.log("rating", rating);
         console.log(typeof parseFloat(rating))
@@ -30,17 +30,17 @@ const getProducts = async (req, res) => {
 
         // If rating is given then retrieve products with rating >= 3
         if (rating) {
-            query.rating = { $gte: Number(rating)}; 
+            query.rating = { $gte: Number(rating) };
         }
 
-        if (category){
-            query.category = {$eq: Number(category) }
-            
+        if (category) {
+            query.category = { $eq: Number(category) }
+
         }
 
         // Case-insensitive search
         if (title_search) {
-            query.title = { $regex: title_search, $options: "i" }; 
+            query.title = { $regex: title_search, $options: "i" };
         }
 
         if (sort_by === sortingConsts.PRICE_HIGH) {
@@ -51,8 +51,8 @@ const getProducts = async (req, res) => {
         console.log(query) //{ rating: { '$gte': 3 } }
 
         // Fetch products based on the query and sort order
-        // const products = await Product.find(query).sort(sortOrder);
-        const products = await Product.find({})
+        const products = await Product.find(query).sort(sortOrder);
+        // const products = await Product.find({})
 
         res.status(200).json(products);
     } catch (error) {
@@ -63,55 +63,57 @@ const getProducts = async (req, res) => {
 
 
 //get one product
-const getoneProduct = async (req,res)=>{
+const getoneProduct = async (req, res) => {
     console.log("vaishnavi")
-    const {id} = req.params
-    console.log("id",id)
+    const { id } = req.params
+    console.log("id", id)
     console.log(mongoose.Types.ObjectId.isValid(id))
 
-    const product = await Product.findOne({ id})
+    const product = await Product.findOne({ id })
     console.log(product)
-    if (!product){
-        return res.status(404).json({error:"Product not found"})
+    if (!product) {
+        return res.status(404).json({ error: "Product not found" })
     }
     res.status(200).json(product)
 }
 
 
 //post products
-const postProducts = async (req,res)=>{
-    const {id,
+const postProducts = async (req, res) => {
+    const { id,
         image_url,
         title,
         price,
         brand,
         rating
-        } = req.body
-   
-    try{
-        const Productsnew = await Product.create({id,image_url,
+    } = req.body
+
+    try {
+        const Productsnew = await Product.create({
+            id, image_url,
             title,
             price,
             brand,
-            rating})
-        res.status(201).json(Productsnew) 
-    }catch(error){
-        res.status(404).json({error:error.message})
+            rating
+        })
+        res.status(201).json(Productsnew)
+    } catch (error) {
+        res.status(404).json({ error: error.message })
     }
 }
 
 
 //update product
 
-const updateProduct = async (req,res)=>{
-    const {id}  = req.params 
-    if (!mongoose.Types.ObjectId.isValid(id)){
-        return res.status(404).json({error:"cannot find the specified product"})
-    } 
-    const product = await Product.findOneAndUpdate({_id:id},{...req.body})
+const updateProduct = async (req, res) => {
+    const { id } = req.params
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: "cannot find the specified product" })
+    }
+    const product = await Product.findOneAndUpdate({ _id: id }, { ...req.body })
 
-    if (!product){
-        return res.status(404).json({error:"the product not found"})
+    if (!product) {
+        return res.status(404).json({ error: "the product not found" })
     }
     res.status(201).json(product)
 }
@@ -119,19 +121,19 @@ const updateProduct = async (req,res)=>{
 
 //delete product 
 
-const deleteProduct = async (req,res)=>{
-    const {id} = req.params 
-    if (!mongoose.Types.ObjectId.isValid(id)){
-        return res.status(404).json({error:"cannot find the specified workout"})
-    } 
+const deleteProduct = async (req, res) => {
+    const { id } = req.params
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: "cannot find the specified workout" })
+    }
 
-    const product = await Product.findOneAndDelete({_id:id})
+    const product = await Product.findOneAndDelete({ _id: id })
 
-    if (!product){
-        return res.status(404).json({error:"the product not found"})
+    if (!product) {
+        return res.status(404).json({ error: "the product not found" })
     }
     res.status(200).json(product)
 }
 
 
-module.exports = {postProducts,getProducts,getoneProduct,updateProduct,deleteProduct}
+module.exports = { postProducts, getProducts, getoneProduct, updateProduct, deleteProduct }
