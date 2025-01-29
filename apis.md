@@ -1,3 +1,61 @@
+```json
+{
+    "_id": "675ada8941308d045096688c",
+    "id": 1001,
+    "image_url": "https://assets.ccbp.in/frontend/react-js/ecommerce/appliances-silver-hair-dryer.png",
+    "title": "Hair Dryer",
+    "style": "Philips HP8100/46 Hair Dryer - Salon Dry Compact",
+    "price": 760,
+    "description": "Cleverly designed, this compact hairdryer is easy to handle and lightweight. The ThermoProtect temperature setting provides the optimal hair drying rate while protecting your hair from overheating. An efficient hairdryer sets your hair dry in just a few seconds. It also comes with a rubber storage hook.",
+    "brand": "Phillips",
+    "total_reviews": 5463,
+    "rating": 3.9,
+    "availability": "In Stock",
+    "similar_products": [
+        {
+            "_id": "679a646b7376c09fafbca3c2",
+            "id": 1002,
+            "image_url": "https://assets.ccbp.in/frontend/react-js/ecommerce/toys-people-toys.png",
+            "title": "Minifigures",
+            "style": "Minifigures",
+            "price": 760,
+            "description": "Collect all mystery mini-figures in the new series 11 and grow your LEGO Minifigure Collection. Each mini-figure comes in a sealed “mystery” bag with its accessories, display plate, and collector’s booklet. Only 1 of 16 individual mini-figures will be available in each “mystery” bag.",
+            "brand": "LEGO",
+            "total_reviews": 5463,
+            "rating": 3.9,
+            "availability": "In Stock"
+        },
+        {
+            "_id": "679a646b7376c09fafbca3c3",
+            "id": 1003,
+            "image_url": "https://assets.ccbp.in/frontend/react-js/ecommerce/electronics-short-tri-pod.png",
+            "title": "Lightweight Tripod",
+            "style": "Lightweight Tripod",
+            "price": 760,
+            "description": "Capture vivid, professional-style photographs with help from this Lightweight Tripod. The tripod makes it easy to achieve reliable stability and score just the right angle when going after that award-winning shot. The handy tripod accommodates a wide range of digital, video, and still cameras.",
+            "brand": "LEGO",
+            "total_reviews": 5463,
+            "rating": 3.9,
+            "availability": "In Stock"
+        }
+    ]
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 1. Login API
     Request URL: `https://apis.ccbp.in/login`
     Request Method: [POST]
